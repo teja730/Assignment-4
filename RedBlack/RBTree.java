@@ -1,6 +1,9 @@
 package RedBlack;
 
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class RBTree<T extends Comparable, E> implements RBTreeInterface<T, E>  {
     public RedBlackNode<T,E> root;
 
@@ -198,12 +201,19 @@ public class RBTree<T extends Comparable, E> implements RBTreeInterface<T, E>  {
 
     }
     public  RedBlackNode<T,E> search(RedBlackNode<T,E> node,T key){
-        if (node==null)
-            return null;
-        if (key.compareTo(node.key)<0)
+        if (node==null){
+            RedBlackNode X=new RedBlackNode<>();
+            X.list=null;
+            return X;
+        }
+        if (key.compareTo(node.key)<0){
+            System.out.println("left");
             return search(node.left,key);
-        else if (key.compareTo(node.key)>0)
+        }
+        else if (key.compareTo(node.key)>0){
+            System.out.println("right");
             return search(node.right,key);
+        }
         else return node;
     }
 

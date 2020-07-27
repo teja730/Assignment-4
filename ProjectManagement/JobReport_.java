@@ -1,10 +1,15 @@
 package ProjectManagement;
 
-public interface JobReport_ {
-   String user();
-   String project_name();
-   int budget();
-   int arrival_time();
-   int completion_time();
-}
+interface JobReport_ {
 
+   default String user() { return null; }
+
+   default String project_name()  { return null; }
+
+   default int budget()  { return 0; }
+
+   default int arrival_time()  { return 0; }
+
+   default int completion_time() { return 0; }
+
+}

@@ -44,9 +44,9 @@ public class Trie<T> implements TrieInterface<T> {
         if (check==null)
             b= false;
         else b= deletehelper(word,root,0);
-        /*if (b)
+        if (b)
             System.out.println("DELETED");
-        else System.out.println("ERROR DELETING");*/
+        else System.out.println("ERROR DELETING");
         return b;
     }
 

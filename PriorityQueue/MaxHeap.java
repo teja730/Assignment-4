@@ -9,7 +9,7 @@ public class MaxHeap<T extends Comparable> implements PriorityQueueInterface<T> 
     int size;
 
     public MaxHeap() {
-        ar= (ArrayList<T>[]) new ArrayList[10000];
+        ar= (ArrayList<T>[]) new ArrayList[1000000];
         size=0;
     }
 
@@ -26,7 +26,6 @@ public class MaxHeap<T extends Comparable> implements PriorityQueueInterface<T> 
        for (int i=0;i<size;i++){
            if (ar[i].get(0).compareTo(element)==0){
                ar[i].add(element);
-
                return;
            }
        }
@@ -53,6 +52,7 @@ public class MaxHeap<T extends Comparable> implements PriorityQueueInterface<T> 
     @Override
     public T extractMax()
     {
+        maxHeapify(0);
         if (size==0)
             return null;
         T popped = ar[0].remove(0);
@@ -86,7 +86,7 @@ public class MaxHeap<T extends Comparable> implements PriorityQueueInterface<T> 
         }
         return false;
     }
-    private void maxHeapify(int pos) {
+    public void maxHeapify(int pos) {
         if (isLeaf(pos))
             return;
         if (( ar[rightChild(pos)]!=null&&ar[pos].get(0) .compareTo(ar[rightChild(pos)].get(0))<0)
@@ -106,27 +106,35 @@ public class MaxHeap<T extends Comparable> implements PriorityQueueInterface<T> 
         T temp=ar[0];
         rearrange(0);
         return temp;
-    }
-    public void rearrange(int k) {
-        ar[k]=null;
-        if (ar[2*k+1]!=null&&ar[2*k+2]!=null){
-            if (ar[2*k+1].compareTo(ar[2*k+2])>0){
-                ar[k]=ar[2*k+1];
-                rearrange(2*k+1);
-            }else{
-                ar[k]=ar[2*k+2];
-                rearrange(2*k+2);
-            }
-        }else if (ar[2*k+1]==null&&ar[2*k+2]!=null){
-            ar[k]=ar[2*k+2];
-            rearrange(2*k+2);
-
-        }else if (ar[2*k+1]!=null&&ar[2*k+2]==null){
-            ar[k]=ar[2*k+1];
-            rearrange(2*k+1);
-        }else if (ar[2*k+1]==null&&ar[2*k+2]==null){
-            return;
-        }
     }*/
+    public void rearrange(int k,T elem) {
+        if (isLeaf(k)){
+            if (elem.compareTo(ar[k].get(0))==0){
+                arrange(k);
+
+            }
+        }else if (ar[rightChild(k)]==null){
+            if (elem.compareTo(ar[k].get(0))==0){
+                arrange(k);
+
+            }else rearrange(leftChild(k),elem);
+        }else {
+            if (elem.compareTo(ar[k].get(0))==0){
+                arrange(k);
+
+            }else {
+                rearrange(leftChild(k),elem);
+                rearrange(rightChild(k),elem);
+            }
+        }
+        /*MaxHeap<T> temp=new MaxHeap<T>();
+        //ArrayList<T>[] nar=(ArrayList<T>[])new ArrayList[10000];
+        for(int i=0;i<size;i++){
+            ArrayList x=ar[i];
+            for (int j=0;j<x.size();j++){
+                temp.insert(ar[i].get(j));
+            }
+        }*/
+    }
 
 }

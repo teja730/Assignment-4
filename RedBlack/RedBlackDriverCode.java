@@ -39,7 +39,7 @@ public class RedBlackDriverCode {
                         String search_key = br.readLine();
                         System.out.println("Searching for: " + search_key);
                         RedBlackNode search = rbt.search(search_key);
-                        if (search != null) {
+                        if (search.getValues() != null) {
                             for (Object person1 : search.getValues()) {
                                 System.out.println(person1);
                             }

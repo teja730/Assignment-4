@@ -1,7 +1,10 @@
 package ProjectManagement;
 
-public interface UserReport_ {
-   String user();
-   int    consumed();
+interface UserReport_ {
+
+   default String user()    { return null; }
+
+   default int consumed() { return 0; }
+
 }
 
